@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}
+my invites
+{% endblock title %}
+
+{% block content %}
+
+
+<div class="ui container">
+    {% if is_empty %}
+    <h1>No invatations here..</h1>
+
+    <div class="discription">
+        <h3 style="text-align: left;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat qui dicta omnis minima non obcaecati
+            debitis
+            accusamus cupiditate inventore mollitia pariatur commodi facilis, odio beatae veniam odit, dolore autem a
+            est
+            explicabo, ullam quidem? Placeat dolorum, sequi, quibusdam eum voluptas eos error obcaecati quam laborum
+            aliquam
+            assumenda culpa itaque, voluptatem distinctio officia necessitatibus ipsa harum repellendus! Cupiditate
+            fugit
+            doloribus aut, nam, cumque non saepe enim deleniti amet ab itaque totam quia exercitationem aperiam nobis
+            nulla
+            explicabo adipisci consectetur corrupti veritatis sed illo ullam fuga voluptatem? Dicta quasi consequatur
+            velit
+            esse ratione officia itaque, maiores officiis alias quaerat assumenda fugit ex!
+        </h3>
+    </div>
+    <br>
+    <div class="discription">
+        <h3 style="text-align: center;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat qui dicta omnis minima non obcaecati
+            debitis
+            accusamus cupiditate inventore mollitia pariatur commodi facilis, odio beatae veniam odit, dolore autem a
+            est
+            explicabo, ullam quidem? Placeat dolorum, sequi, quibusdam eum voluptas eos error obcaecati quam laborum
+            aliquam
+            assumenda culpa itaque, voluptatem distinctio officia necessitatibus ipsa harum repellendus! Cupiditate
+            fugit
+            doloribus aut, nam, cumque non saepe enim deleniti amet ab itaque totam quia exercitationem aperiam nobis
+            nulla
+            explicabo adipisci consectetur corrupti veritatis sed illo ullam fuga voluptatem? Dicta quasi consequatur
+            velit
+            esse ratione officia itaque, maiores officiis alias quaerat assumenda fugit ex!
+        </h3>
+    </div>
+    <br>
+    <div class="discription">
+        <h3 style="text-align: left;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat qui dicta omnis minima non obcaecati
+            debitis
+            accusamus cupiditate inventore mollitia pariatur commodi facilis, odio beatae veniam odit, dolore autem a
+            est
+            explicabo, ullam quidem? Placeat dolorum, sequi, quibusdam eum voluptas eos error obcaecati quam laborum
+            aliquam
+            assumenda culpa itaque, voluptatem distinctio officia necessitatibus ipsa harum repellendus! Cupiditate
+            fugit
+            doloribus aut, nam, cumque non saepe enim deleniti amet ab itaque totam quia exercitationem aperiam nobis
+            nulla
+            explicabo adipisci consectetur corrupti veritatis sed illo ullam fuga voluptatem? Dicta quasi consequatur
+            velit
+            esse ratione officia itaque, maiores officiis alias quaerat assumenda fugit ex!
+        </h3>
+    </div>
+
+
+    {% endif %}
+
+    {% for obj in qs %}
+    <div class="ui segment">
+        <div class="ui grid">
+            <div class="row">
+                <div class="three wide column">
+                    <img class="ui small circular image" src={{obj.avatar.url}}>
+                </div>
+                <div class="thirteen wide column">
+                    <h3>{{obj.user}}</h3>
+                    <p>{{obj.bio}}</h3>
+                        <br>
+                        <a href="">
+                            <button class="ui primary button w-big mb-5">See profile</button>
+                        </a>
+                    <form action="{% url 'profiles:accept-invite' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="profile_pk" value={{obj.pk}}>
+                        <button type="submit" class="ui positive basic button w-big mb-5">
+                            <i class="check icon"></i>
+                            Accept invite
+                        </button>
+                    </form>
+                    <form action="{% url 'profiles:reject-invite' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="profile_pk" value={{obj.pk}}>
+                        <button type="submit" class="ui negative basic button w-big mb-5">
+                            <i class="close icon"></i>
+                            Reject invite
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

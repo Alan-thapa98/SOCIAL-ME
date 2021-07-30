@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+delete post
+{% endblock title %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+{% if 'warning' in message.tags %}
+<div class='ui negative message'>
+    <div class="header">
+        {{message}}
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if not messages %}
+<div class="mgs_design ui container ">
+    <div class="ui segment ">
+        <h3>Delete post?</h3>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <p>Are you sure you want to delete the post?</p>
+            <button type='submit' class="ui positive button w-full mt-5">Yes! I Want.</button>
+        </form>
+        <a href="/posts/" target="_blank" rel="noopener noreferrer">
+            <button type='' class="ui primary button w-full mt-5">No! I Dont.</button>
+        </a>
+    </div>
+</div>
+</div>
+<style>
+    .mgs_design {
+
+        height: 73vh;
+    }
+</style>
+{% endif %}
+
+{% endblock content %}

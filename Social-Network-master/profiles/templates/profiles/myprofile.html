@@ -1,0 +1,283 @@
+{% extends 'base.html' %}
+{% url 'profiles:my-profile-view-edit' as path_to_edit_profile %}
+{% block title %}
+my profile
+{% endblock title %}
+
+{% block content %}
+
+<div class="ui grid inverted container container_desigen_bg">
+    {% if confirm %}
+    <div class="ui green message">Your profile has been updated</div>
+    {% endif %}
+
+    <!-- these is for the user image and for the profile pic -->
+    <div class="row" style="
+    background-image: url('{{profile.avatar.url}}');
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: cover;
+    color: #000;
+    border-radius: 2px;
+
+
+">
+        <div class="five wide column">
+
+        </div>
+        <div class="six wide column">
+            <div style="text-align: center;">
+                <img src="{{profile.avatar.url}}" style="align-content: center;
+            height: 13rem;
+            width: 13rem;
+            border: 7px solid rgba(255, 255, 255, .15);
+            border-radius: 50%;
+             margin-top:6rem;
+        ">
+            </div>
+        </div>
+        <div class="four wide column">
+        </div>
+    </div>
+
+    <!-- name and otehrs -->
+    <div style="height:10rem; " class="">
+        <h1 style="text-align: center; text-transform: capitalize;">
+            {{profile.first_name}}
+            {{profile.last_name}}
+        </h1>
+        <p style="text-align: center;"> {{profile.bio}}</p>
+        <p style="text-align: center;"><a href="/profiles/myprofile/profile_edite"><b>Edite Your Pro</b></a></p>
+    </div>
+
+
+
+
+    <!-- these is for navbar -->
+    <div style="background: #323232 !important; height:70px; margin: 0px; " class="ui inverted menu nav  ">
+        <div class="ui container  ">
+            <a href="/posts/" class=" item">
+                Posts: {{profile.get_posts_no}}
+            </a>
+            <a href="/posts/" class=" item">
+                NewPosts: {{profile.get_posts_no}}
+            </a>
+            <a href="/posts/" class=" item">
+                Photos: {{profile.get_posts_no}}
+            </a>
+            <a href="/posts/" class=" item">
+                Videos: 0
+            </a>
+            <a href="/posts/" class=" item">
+                Friends: {{profile.get_friends_no}}
+            </a>
+            <a href="/posts/" class=" item">
+                Favourites: {{profile.get_likes_given_no}}
+            </a>
+            <div class="item float right ">
+                <form action="" method="GET">
+                    <div class="ui action left icon input">
+                        <input class="prompt" type="text" name="q" placeholder="name of a friend...">
+                        <i class="search icon"></i>
+                        <button type="submit" class="ui button">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- these is for other sections -->
+    <div class="row">
+        <div class="six wide column ">
+            <h1>firends</h1>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta ab eum quas possimus rerum itaque fuga, et
+            ipsa nihil labore incidunt asperiores eveniet earum in nostrum doloribus mollitia beatae! Distinctio?
+        </div>
+        <div class="ten wide column ">
+            {% for obj in qs %}
+            <div class="ui fluid card">
+                <div class="content">
+                    <div class="right floated meta">
+                        <div class="ui grid">
+                            <div class="row">
+                                {% ifequal request.user obj.author.user %}
+                                <a href="{% url 'posts:post-update' obj.pk %}"><button
+                                        class="ui button bwhite-lg ">Update</button></a>
+                                <a href="{% url 'posts:post-delete' obj.pk %}"><button
+                                        class="ui button bwhite-lg ">Delete</button></a>
+                                {% endifequal %}
+                            </div>
+                        </div>
+                    </div>
+                    <img class="ui avatar image" src={{obj.author.avatar.url}}>
+                    {{ obj.author.user }} - {{ obj.created|timesince}} ago
+                </div>
+                <div class="ui fluid image">
+                    {% if obj.image %}
+                    <img src={{obj.image.url}}>
+                    {% endif %}
+                </div>
+                <div class="content">
+                    <p> {{ obj.content }} </p>
+                    <div class="right floated">
+                        <form action="{% url 'posts:like-post-view' %}" method="POST" class='like-form' id='{{obj.id}}'>
+                            {% csrf_token %}
+                            <input type="hidden" name="post_id" value={{obj.id}}>
+
+                            <button type="submit" class="ui button like-btn{{obj.id}}">
+                                {% if profile not in obj.liked.all %}
+                                Like
+                                {% else %}
+                                Unlike
+                                {% endif %}
+                            </button>
+                            <div class="ui grid">
+                                <div class="column">
+                                    <div class="like-count{{obj.id}}"> {{obj.num_likes}} </div>
+                                </div>
+                                <div class="column">
+                                    likes
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <i class="comment icon"></i>
+                    <span> {{ obj.num_comments }} comments</span>
+                </div>
+                <div class="extra content">
+                    <!-- {% if num_comments < 0 in obj.comment_set.all %} <p>You! Haven't get andy comment Yet.</p>
+                            {% else %}
+                            <button style="width:100%;" class="cmt_btn ui button mb-5 w-full ">show / hide comments</button>
+                            {% endif %} -->
+
+                    <button style="width:100%;" class="cmt_btn ui button mb-5 w-full ">show / hide comments</button>
+
+
+
+                    <div class="comment-box">
+                        {% if obj.comment_set.all %}
+                        {% for c in obj.comment_set.all %}
+                        <div class="ui segment mb-5">
+                            <img class="ui avatar image" src={{c.user.avatar.url}}>
+                            <span>{{ c.user }}</span>
+                            <div class='mt-5'>{{ c.body }}</div>
+                        </div>
+
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <form action="" method="POST" class='ui fluid form'>
+                        <div class="ui grid">
+                            <div class="row">
+                                <div class="thirteen wide column">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value={{obj.id}}>
+                                    {{ c_form }}
+                                </div>
+                                <div class="three wide column ">
+                                    <button type="submit" name="submit_c_form"
+                                        class="ui primary button  w-full">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br><br><br><br>
+
+
+
+
+
+    <div class="ui segment">
+        <!-- <h3>my profile: {{request.user}}</h3> -->
+        <div class="ui grid">
+            <div class='row'>
+                <div class='six wide column'>
+                    <!--  <img class="ui medium rounded image" src="{{profile.avatar.url}}">
+                <a href="">{{profile.avatar.url}}</a>
+                <a href="">{{profile.avatar}}</a>
+                <div class="row mt-5"> -->
+                    <!-- <button class='ui secondary button' id='modal-btn'>Update your profile</button> -->
+                    <!-- <a href="{{path_to_edit_profile}}" class='ui secondary button' id='modal-btn'>Update your
+                        profile</a>
+                    <a href="/profiles/myprofile/profile_edite" class='ui primary button' id='modal-btn'>Update your
+                        profile</a> -->
+                    <h1>six</h1>
+                </div>
+
+                <div class="ten wide column">
+                    <table class="ui table">
+                        <tbody>
+                            <tr>
+                                <td>username</td>
+                                <td>{{profile.user}}</td>
+                            </tr>
+                            <tr>
+                                <td>first name</td>
+                                <td>{{profile.first_name}}</td>
+                            </tr>
+                            <tr>
+                                <td>last name</td>
+                                <td>{{profile.last_name}}</td>
+                            </tr>
+                            <tr>
+                                <td>bio</td>
+                                <td>{{profile.bio}}</td>
+                            </tr>
+                            <tr>
+                                <td>number of friends</td>
+                                <td>{{profile.get_friends_no}}</td>
+                            </tr>
+                            <tr>
+                                <td>friends:</td>
+                                <td>
+                                    <ul>
+                                        {% for friend in profile.get_friends %}
+                                        <li>{{friend}}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>number of posts</td>
+                                <td>{{profile.get_posts_no}}</td>
+                            </tr>
+                            <tr>
+                                <td>number of likes given</td>
+                                <td>
+                                    {{profile.get_likes_given_no}}
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>number of likes received</td>
+                                <td>{{profile.get_likes_recieved_no}}</td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<style>
+    .container_desigen_bg {
+        background: #282828;
+        /* color: #f3f3f3;*/
+        color: #fff;
+    }
+</style>
+
+
+
+
+{% endblock content %}

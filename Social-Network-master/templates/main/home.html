@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}
+home
+{% endblock title %}
+
+{% block content %}
+
+
+<div class="ui grid container">
+    <br>
+
+    <hr>
+    <div class="ui row">
+        <div class="column six wide">
+            <h1>Bffbook</h1>
+            <p class="description">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque, repellat deleniti! Temporibus eum
+                nostrum assumenda. Quasi architecto facere cupiditate dolorem non voluptatem quam dolore voluptate
+                laudantium? Voluptates quo ab ratione?
+            </p>
+        </div>
+        <div class="column eight wide">
+            <div class="ui form">
+                <form action="/login" method="POST">
+                    <div class="field">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="loginusername" name="loginusername"
+                            placeholder="Enter your username " required>
+                    </div>
+                    <div class="field">
+                        <label for="pass">Enter your password </label>
+                        <input type="password" class="form-control" id="loginpassword" name="loginpassword"
+                            placeholder="Enter your password " required>
+                    </div>
+                    {% csrf_token %}
+                    <button type="submit" class="ui green tiny button">login</button>
+                </form>
+            </div>
+        </div>
+        <div class="column one wide">
+            <a href="/singup_page">
+                <div class="ui blue small button">
+                    SignUp
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="ui container">
+    <h1>These is the lorem!</h1>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. At harum, odio natus tenetur explicabo facere vero
+        molestiae recusandae rem. Eligendi laboriosam esse maxime laborum? Nobis cumque eaque neque quo ea. Non possimus
+        dolores corporis aliquid enim accusamus architecto ratione libero, molestiae cumque fuga. Animi nam quibusdam,
+        excepturi quasi aliquid, eaque voluptatum dolore, alias repudiandae itaque inventore facilis a. Praesentium
+        eligendi
+        vitae, nihil magnam nesciunt architecto aliquam consequatur perferendis sit, nulla, molestias optio ex! Quaerat,
+        esse quo at suscipit consectetur sunt distinctio eos ratione veritatis, repellendus mollitia possimus rem
+        aperiam
+        dolore, necessitatibus quasi eaque minus. Pariatur minus possimus reiciendis debitis ipsum?
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. At harum, odio natus tenetur explicabo facere vero
+        molestiae recusandae rem. Eligendi laboriosam esse maxime laborum? Nobis cumque eaque neque quo ea. Non possimus
+        dolores corporis aliquid enim accusamus architecto ratione libero, molestiae cumque fuga. Animi nam quibusdam,
+        excepturi quasi aliquid, eaque voluptatum dolore, alias repudiandae itaque inventore facilis a. Praesentium
+        eligendi
+        vitae, nihil magnam nesciunt architecto aliquam consequatur perferendis sit, nulla, molestias optio ex! Quaerat,
+        esse quo at suscipit consectetur sunt distinctio eos ratione veritatis, repellendus mollitia possimus rem
+        aperiam
+        dolore, necessitatibus quasi eaque minus. Pariatur minus possimus reiciendis debitis ipsum?
+    </p>
+
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. At harum, odio natus tenetur explicabo facere vero
+        molestiae recusandae rem. Eligendi laboriosam esse maxime laborum? Nobis cumque eaque neque quo ea. Non possimus
+        dolores corporis aliquid enim accusamus architecto ratione libero, molestiae cumque fuga. Animi nam quibusdam,
+        excepturi quasi aliquid, eaque voluptatum dolore, alias repudiandae itaque inventore facilis a. Praesentium
+        eligendi
+        vitae, nihil magnam nesciunt architecto aliquam consequatur perferendis sit, nulla, molestias optio ex! Quaerat,
+        esse quo at suscipit consectetur sunt distinctio eos ratione veritatis, repellendus mollitia possimus rem
+        aperiam
+        dolore, necessitatibus quasi eaque minus. Pariatur minus possimus reiciendis debitis ipsum?
+    </p>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        console.log('working')
+    })
+</script>
+{% endblock scripts %}

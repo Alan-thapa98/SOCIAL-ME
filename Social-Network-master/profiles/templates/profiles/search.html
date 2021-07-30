@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% url 'home-view' as path_to_home %}
+{% url 'posts:main-post-view' as path_to_posts %}
+{% url 'profiles:my-profile-view' as path_to_my_profile %}
+{% url 'profiles:my-invites-view' as path_to_my_invites %}
+{% url 'profiles:invite-profiles-view' as path_to_invites %}
+{% url 'profiles:all-profiles-view' as path_to_all_profiles %}
+{% block title %}
+Searching for: {{query}}
+{% endblock title %}
+
+{% block content %}
+<div class="ui container">
+      <h3>Search results for : <i><a href="/profiles/search/?query={{query}}">{{query}}</a></i></h3>
+      {% if allProfiles|length < 1 %} <h2>No search results</h2>
+
+            <h2>Your search query : <b>{{query}}</b> did not match any documents. <br>
+                  Suggestions:</h2>
+            <h3>
+                  <ul>
+                        <li>Make sure that all words are spelled correctly.</li>
+                        <li>Try more general keywords.</li>
+                        <li> Try fewer keywords.</li>
+                        <li> Try different keywords.</li>
+                        </li>
+                  </ul>
+
+            </h3>
+            {% endif %}
+            {% for user in allProfiles %}
+            <div class="ui segment">
+                  <div class="ui grid">
+                        <div class="row">
+                              <div class="three wide column">
+                                    <img class="ui small circular image" src={{user.avatar.url}}>
+                              </div>
+                              <div class="thirteen wide column">
+                                    <h3>{{user.user}} {{user.last_name}}</h3>
+                                    <p>{{user.bio}}</h3>
+                                          <br>
+                                          <a href="">
+                                                <button class="ui primary button w-big mb-5">See profile</button>
+                                          </a>
+                                    <form action="{% url 'profiles:accept-invite' %}" method="POST">
+                                          {% csrf_token %}
+                                          <input type="hidden" name="profile_pk" value={{user.pk}}>
+                                          <button type="submit" class="ui positive basic button w-big mb-5">
+                                                <i class="check icon"></i>
+                                                Accept invite
+                                          </button>
+                                    </form>
+                                    <form action="{% url 'profiles:reject-invite' %}" method="POST">
+                                          {% csrf_token %}
+                                          <input type="hidden" name="profile_pk" value={{user.pk}}>
+                                          <button type="submit" class="ui negative basic button w-big mb-5">
+                                                <i class="close icon"></i>
+                                                Reject invite
+                                          </button>
+                                    </form>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            {% endfor %}
+
+</div>
+{% endblock content %}

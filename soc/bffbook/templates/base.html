@@ -1,0 +1,46 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!--Custom css-->
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+  <!-- semantic UI -->
+  <link rel="stylesheet" type='text/css'
+    href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <!-- these is the downloaded files  -->
+  <link rel="stylesheet" href="{% static 'semantic.min.css'%} ">
+  <script src="{% static 'semantic.min.js'%} "></script>
+  <script src="{% static 'jquery-3.3.1.min.js'%} "></script>
+  <script src="{% static 'main.js'%}"></script>
+
+  <title>bffbook - {% block title %}{% endblock title %}</title>
+</head>
+
+<body style="background: #282828 !important;">
+  {% include 'main/navbar.html' %}
+  <div style=" margin-top:6.5rem;" class="ui container-fluide">
+    {% block content %}
+
+    {% endblock content %}
+  </div>
+  {% include 'main/footer.html' %}
+
+
+
+  {% block scripts %}
+  {% endblock scripts %}
+
+
+  <!--Custom js ADD-->
+  <script type="text/javascript" src="{% static 'main.js' %}"></script>
+
+</body>
+
+</html>

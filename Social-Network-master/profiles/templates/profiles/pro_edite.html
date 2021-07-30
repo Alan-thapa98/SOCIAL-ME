@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+my profile
+{% endblock title %}
+
+{% block content %}
+<!-- THESE IS THE TEST  -->
+<div class="ui container design_for_edit">
+    <!-- these is for the user image and for the profile pic -->
+    <div class="row" style="
+        background-image: url('{{profile.avatar.url}}');
+        background-repeat: no-repeat;
+        background-position:center;
+        background-size: cover;
+        color: #000;
+        border-radius: 2px;
+    
+    
+    ">
+        <div class="five wide column">
+
+
+        </div>
+        <div class="six wide column">
+            <div style="text-align: center;">
+                <img src="{{profile.avatar.url}}" style="align-content: center;
+                height: 13rem;
+                width: 13rem;
+                border: 7px solid rgba(255, 255, 255, .15);
+                border-radius: 50%;
+                 margin-top:6rem;
+            ">
+            </div>
+        </div>
+        <div class="four wide column">
+        </div>
+    </div>
+    <br>
+
+    <div class="description">
+        <div class="ui header">Provide some additional/newest info about you </div>
+        <form action="" method="POST" class="ui form" enctype='multipart/form-data'>
+            {% csrf_token %}
+            {{form.as_p}}
+    </div>
+
+    <div class="actions">
+        <button type='submit' class="ui positive right labeled icon button">
+            Update
+            <i class="checkmark icon"></i>
+        </button>
+        </form>
+    </div>
+</div>
+<!-- THESE IS THE TEST  -->
+
+{% endblock content %}

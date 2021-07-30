@@ -1,0 +1,35 @@
+{% url 'home-view' as path_to_home %}
+{% url 'posts:main-post-view' as path_to_posts %}
+{% url 'profiles:my-profile-view' as path_to_my_profile %}
+{% url 'profiles:my-invites-view' as path_to_my_invites %}
+{% url 'profiles:invite-profiles-view' as path_to_invites %}
+{% url 'profiles:all-profiles-view' as path_to_all_profiles %}
+
+<!-- ************************************  fotter *********************************************** -->
+<div class="ui invertrd" style=" border-radius: 0px !important;
+    padding: 10px 0 10px 0 !important;
+    background-color: #323232 !important;
+    margin-top:20px;
+    " class="container-fluid text-center">
+    <footer class="bgcoool invertrd">
+        <div class="row">
+            <div class="col-12 col-md">
+                <small class="d-block mb-3 text-center">© 2021 {{localtime}}</small>
+                <small class="d-block mb-3 text-center">bffbooks.Com</small>
+            </div>
+    </footer>
+</div>
+<style>
+    .bgcoool {
+        height: 60px;
+    }
+
+    .text-center {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        color: beige;
+        font-size: large;
+    }
+</style>
+<!-- ************************************ end of  fotter *********************************************** -->

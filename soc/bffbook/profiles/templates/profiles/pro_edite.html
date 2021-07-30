@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+my profile
+{% endblock title %}
+
+{% block content %}
+<!-- THESE IS THE TEST  -->
+<div class="container design_for_edit">
+    <div class="image content image_edit_forend">
+        <div class="ui medium image">
+            <img src="{{profile.avatar.url}}">
+            <a src="{{profile.avatar.url}}"></a>
+            <!-- <img src="{{profile.avatar.url}}"> -->
+        </div>
+        <div class="description">
+            <div class="ui header">Provide some additional/newest info about you </div>
+            <form action="" method="POST" class="ui form" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{form.as_p}}
+        </div>
+    </div>
+    <div class="actions">
+        <button type='submit' class="ui positive right labeled icon button">
+            Update
+            <i class="checkmark icon"></i>
+        </button>
+        </form>
+    </div>
+</div>
+<!-- THESE IS THE TEST  -->
+
+{% endblock content %}

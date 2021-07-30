@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+update post
+{% endblock title %}
+
+{% block content %}
+<div class='ui segment container_design'>
+    <h3 class="updated_text_design ">Update post</h3>
+    <form action="" method="POST" class="ui form from_design " enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <button type='submit' class="ui button primary mt-5">Update</button>
+    </form>
+</div>
+<style>
+    .container_design {
+        height: 90vh;
+    }
+
+    .updated_text_design {
+        text-align: center;
+    }
+
+    .from_design {
+        margin: 2px;
+        border: 2px solid red;
+        height: auto;
+
+    }
+</style>
+{% endblock content %}
